@@ -46,7 +46,7 @@ class smileysmanager {
 				);
 		}
 		
-		file_put_contents(CB_CACHE_SMILEYS,'<?php '."\n".'$GLOBALS[\'cb_smileys\'] = unserialize(\''.str_replace("'","\\'",serialize($smileys)).'\');'."\n".'?>');
+		file_put_contents(CB_CACHE_SMILEYS,'<?php $GLOBALS[\'cb_smileys\'] = unserialize(\''.str_replace("'","\\'",serialize($smileys)).'\'); ?>');
 	}
 
 	/* Le formulaire de banques */

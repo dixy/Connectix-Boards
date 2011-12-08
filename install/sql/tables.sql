@@ -162,6 +162,7 @@ CREATE TABLE `CB_TABLE_PREFIXsmileys` (
   `sm_symbol` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
   `sm_filename` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
   `sm_orig_used` enum('oui','non') NOT NULL default 'oui',
+  `sm_form` tinyint( 2 ) NOT NULL DEFAULT '1',
   PRIMARY KEY  (`sm_id`)
 ) ENGINE=MyISAM;
 
