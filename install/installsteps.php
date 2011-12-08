@@ -499,7 +499,9 @@ function _filltables ($cfg_data) {
 		'pass_salt' => genValidCode(),
 		'cookie_path' => '/',
 		'mail_mp' => "Bonjour {--mail_user_name--},\r\n\r\nVous avez reçu un (ou plusieurs) nouveau(x) message(s) personnel(s), dont le premier est de la part de {--mail_poster--} sur {--mail_forumname--}.\r\n\r\nPour le(s) consulter, connectez-vous au forum et rendez-vous dans votre panneau de gestion des messages personnels, ou suivez le lien suivant:\r\n{--mail_mp_link--}\r\n\r\nA bientot sur nos forums,\r\n\r\n{--mail_forum_owner--}",
-		'mailsubject_mp' => 'Vous avez recu un nouveau MP sur {--mail_forumname--}!'
+		'mailsubject_mp' => 'Vous avez recu un nouveau MP sur {--mail_forumname--}!',
+		'timezone' => '0',
+		'summertime' => 'no'
 		);
 	
 	foreach ($cfg_data as $key => $value) {
