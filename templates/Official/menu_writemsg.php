@@ -57,7 +57,7 @@
 						<option value="16" class="sizeitem" style="font-size:16;">16</option>
 						<option value="20" class="sizeitem" style="font-size:20;">20</option>
 					</select>
-					<select name="font" class="fontchooser" onchange="tag_select(this.form.police,'<?php echo $ta_opt['id']; ?>','font');">
+					<select name="font" class="fontchooser" onchange="tag_select(this.form.font,'<?php echo $ta_opt['id']; ?>','font');">
 						<option class="fonttitle" selected="selected" disabled="disabled"><?php echo lang('font'); ?></option>
 						<option value="serif"  class="fontitem" style="font-family:serif;">serif</option>
 						<option value="sans-serif"  class="fontitem" style="font-family:sans-serif;">sans-serif</option>
