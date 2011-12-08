@@ -1,7 +1,7 @@
 #############################################################################
 # 	.htaccess for Url Rewriting in Connectix Boards							#
 # 																			#
-# 	Connectix Boards 0.8, free interactive php bulletin boards.				#
+# 	Connectix Boards 1.0, free interactive php bulletin boards.				#
 #	Copyright (C) 2005-2007  Jasienski Martin.								#
 #																			#
 #	This program is free software; you can redistribute it and/or modify	#
