@@ -21,7 +21,7 @@
 define('CB_INC', 'CB');
 define('CB_ADMIN', 'CB');
 
-define('CUR_VERSION','0.8.2');
+define('CUR_VERSION','1.0');
 define('CB_SKIN','Zephyr');
 define('CB_LANG','fr');
 
