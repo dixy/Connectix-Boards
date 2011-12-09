@@ -8,9 +8,9 @@
 */
 $merge = array (
 	/* Enregistrement */
-	'r_login_ok' => 'Nom d\'utilisateur valide et disponible.',
+	'r_login_ok' => 'Nom d’utilisateur valide et disponible.',
 	'r_password_ok' => 'Mot de passe valide.',
-	'r_mail_ok' => 'Adresse mail correcte (syntaxiquement).',
+	'r_mail_ok' => 'Adresse courriel correcte (syntaxiquement).',
 	'r_captcha_ok' => 'Code aléatoire recopié correctement.',
 	
 	/* Edition rapide */

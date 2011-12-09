@@ -7,16 +7,16 @@
 * ::Connectix Boards 2005::
 */
 $merge = array (
-	'wm_editing' => 'Editer un message',
+	'wm_editing' => 'Éditer un message',
 	'wm_writing' => 'Répondre',
 	'wm_newtopic' => 'Créer un nouveau sujet',
 	'wm_newpoll' => 'Créer un nouveau sondage',
 	'wm_modoptions' => 'Options de modération',
-	'wm_mod_topicstatus' => 'Etat du sujet après écriture',
-	'wm_mod_edit' => 'Modifier l\'avis d\'édition de ce message par mon passage?',
+	'wm_mod_topicstatus' => 'État du sujet après écriture',
+	'wm_mod_edit' => 'Modifier l’avis d’édition de ce message par mon passage ?',
 	'wm_normaltopic' => 'Normal',
-	'wm_lastmessages' => 'Derniers messages écrits [10 en commencant par le dernier]',
-	'wm_topic_infos' => 'Spécifiez les titre et commentaire de votre sujet',
+	'wm_lastmessages' => 'Derniers messages écrits [10 en commençant par le dernier]',
+	'wm_topic_infos' => 'Spécifiez le titre et le commentaire de votre sujet',
 	'wm_topictitle' => 'Titre du sujet',
 	'wm_topiccomment' => 'Commentaire',
 	'wm_message' => 'Composez votre message',
@@ -26,7 +26,7 @@ $merge = array (
 	'wm_submittopic' => 'Envoyer le nouveau sujet',
 	'wm_submitpoll' => 'Envoyer le nouveau sondage',
 	'wm_submitmodifpost' => 'Envoyer le message modifié',
-	'wm_redirect' => 'Rediriger, apres envoi du message',
+	'wm_redirect' => 'Rediriger, après envoi du message',
 	'wm_to' => 'Vers',
 	'wm_currentmessage' => 'Vers le message courant'
 	);

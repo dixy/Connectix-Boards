@@ -1,6 +1,6 @@
 <?php
 /**
-* userprofile.lang
+* topic.lang
 * Lang definition file.
 * Contains the french translation for Connectix Boards.
 * Made by Jasienski Martin
@@ -13,8 +13,8 @@ $merge = array (
 	't_fr_message' => 'Composez votre message',
 	't_track' => 'Suivre ce sujet',
 	't_notrack' => 'Ne plus suivre ce sujet',
-	't_tracked' => 'Vous venez d\'activer le suivi de ce sujet par mail. Vous serez alerté par l\'envoi d\'un mail lorsqu\'un nouveau message sera posté dans ce sujet.',
-	't_nottracked' => 'Ce sujet ne fait plus l\'objet du suivi par mail.',
+	't_tracked' => 'Vous venez d’activer le suivi de ce sujet par courriel. Vous serez alerté par l’envoi d’un courriel lorsqu’un nouveau message sera posté dans ce sujet.',
+	't_nottracked' => 'Ce sujet ne fait plus l’objet du suivi par courriel.',
 	't_bookmark' => 'Mettre en favori',
 	't_nobookmark' => 'Retirer des favoris',
 	't_bookmarked' => 'Ce sujet fait désormais partie de vos favoris.',
@@ -24,12 +24,12 @@ $merge = array (
 	't_msg_unread' => 'Message non-lu',
 	't_poll_title' => 'Sondage',
 	't_poll_white' => 'Vote blanc',
-	't_poll_vote' => 'Voter !',
+	't_poll_vote' => 'Voter !',
 	't_poll_votes' => 'vote(s)',
 	't_poll_votes_voted' => 'Nombre total de votes (non-blancs)',
 	't_poll_white_voted' => 'Nombre de votes blancs',
 	't_poll_alreadyvoted' => 'Vous ne pouvez plus voter',
-	't_poll_notvoted' => 'Vous n\'avez pas encore voté',
+	't_poll_notvoted' => 'Vous n’avez pas encore voté',
 	't_poll_notgood_voted' => 'La proposition sélectionnée est erronée.',
 	't_poll_modifymode' => 'Modifier le sondage',
 	't_poll_normalmode' => 'Voir le sondage',

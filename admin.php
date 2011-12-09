@@ -62,3 +62,4 @@ $GLOBALS['cb_tpl']->display('gen_main.php');
 
 $GLOBALS['cb_db']->close();
 ?>
+

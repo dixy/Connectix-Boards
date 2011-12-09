@@ -6,12 +6,12 @@
 * ::Connectix Boards 2005::
 */
 var lang = {
-	'form_inserturl':'Insérez l\'adresse du lien',
-	'form_insertimg':'Insérez l\'adresse complète de l\'image',
+	'form_inserturl':'Insérez l’adresse du lien',
+	'form_insertimg':'Insérez l’adresse complète de l’image',
 	'form_link':'Titre du lien',
-	'form_insertmail':'Insérez une adresse e-mail',
+	'form_insertmail':'Insérez une adresse courriel',
 	'msg_edited':'Vous venez de modifier ce message.',
-	'gen_wait':'Veuillez patienter...',
+	'gen_wait':'Veuillez patienter …',
 	'tt_track':'Suivre ce sujet',
 	'tt_notrack':'Ne plus suivre ce sujet',
 	'tt_bookmark':'Mettre en favori',
