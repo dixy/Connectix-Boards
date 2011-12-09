@@ -16,6 +16,7 @@ $merge = array (
 	'users_sort_class' => 'Groupe',
 	'users_sort_name' => 'Nom d\'utilisateur',
 	'users_sort_posts' => 'Nombre de messages',
+	'users_sort_connect' => 'Dernière connexion',
 	'users_order' => 'Ordre',
 	'users_asc' => 'Croissant',
 	'users_desc' => 'Décroissant',

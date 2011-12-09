@@ -25,7 +25,7 @@ $GLOBALS['cb_pagename'][] = lang('users');
 
 /* Création de la requète */
 $url='';
-$sortposs=array('usr_name','usr_id','usr_class','usr_nbmess');
+$sortposs=array('usr_name','usr_id','usr_class','usr_nbmess','usr_lastconnect');
 $query = 'SELECT SQL_CALC_FOUND_ROWS usr_id,usr_nbmess,usr_registertime,usr_name,usr_class,con_timestamp,gr_name,gr_color 
 	FROM '.$GLOBALS['cb_db']->prefix.'users
 	LEFT JOIN '.$GLOBALS['cb_db']->prefix.'groups ON gr_id=usr_class
@@ -99,7 +99,8 @@ $items = array(
 	array('name' => 'usr_name','selected' => (isset($_GET['su_sort']) && $_GET['su_sort']=='usr_name'),'value' => '','lang' => 'users_sort_name'),
 	array('name' => 'usr_id','selected' => (isset($_GET['su_sort']) && $_GET['su_sort']=='usr_id'),'value' => '','lang' => 'users_sort_reg'),
 	array('name' => 'usr_class','selected' => (isset($_GET['su_sort']) && $_GET['su_sort']=='usr_class'),'value' => '','lang' => 'users_sort_class'),
-	array('name' => 'usr_nbmess','selected' => (isset($_GET['su_sort']) && $_GET['su_sort']=='usr_nbmess'),'value' => '','lang' => 'users_sort_posts')
+	array('name' => 'usr_nbmess','selected' => (isset($_GET['su_sort']) && $_GET['su_sort']=='usr_nbmess'),'value' => '','lang' => 'users_sort_posts'),
+	array('name' => 'usr_lastconnect','selected' => (isset($_GET['su_sort']) && $_GET['su_sort']=='usr_lastconnect'),'value' => '','lang' => 'users_sort_connect')
 	);
 $GLOBALS['cb_tpl']->assign('sort_list',array ( 'name' => 'su_sort', 'style' => 150, 'items' => $items ));
 
