@@ -20,7 +20,7 @@ if (!defined('CB_INC')) exit('Incorrect access attempt !!');
 
 /* Définition des constantes de chemin et de version */
 define('CB_PATH',dirname(__FILE__).'/');
-define('CB_VERSION', '1.0');
+define('CB_VERSION', '0.8.4');
 
 /** Constantes de 'débug' :  Laisser en commentaire pour un meilleur affichage. **/
 /* Affichage des fichiers et lignes des notices et warnings. */
