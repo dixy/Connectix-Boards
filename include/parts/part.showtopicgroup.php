@@ -22,8 +22,10 @@ if (!defined('CB_INC')) exit('Incorrect access attempt !!');
 if (!is_numeric($_GET['showtopicgroup']))
 	redirect();
 
-if (!isTg((int)$_GET['showtopicgroup']))
+if (!isTg((int)$_GET['showtopicgroup'])) {
+	header("HTTP/1.0 404 Not Found");
 	trigger_error(lang('error_tg_noexist'),E_USER_ERROR);
+}
 
 if (!$_SESSION['cb_user']->getAuth('see',(int)$_GET['showtopicgroup']))
 	trigger_error(lang('error_permerror'),E_USER_ERROR);

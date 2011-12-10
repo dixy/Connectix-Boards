@@ -309,8 +309,10 @@ if (isset($_GET['showprofile'])) {
 	$GLOBALS['cb_addressbar'][] = lang('usr_showprofile');
 	$GLOBALS['cb_pagename'][] = lang('usr_showprofile');
 	
-	if (!isUser((int)$_GET['showprofile']))
+	if (!isUser((int)$_GET['showprofile'])) {
+		header("HTTP/1.0 404 Not Found");
 		trigger_error(lang('error_user_noexist'),E_USER_ERROR);
+}
 	
 	$return=$GLOBALS['cb_db']->query('SELECT usr_name,usr_id,IF(usr_publicemail,usr_email,\'\') AS usr_email_ok,usr_gender,usr_birthdate,usr_realname,usr_lastconnect,usr_website,usr_registertime,usr_nbmess,usr_class,gr_name,gr_status,usr_website,usr_msn,usr_icq,usr_aim,usr_yahoo,usr_place,usr_presentation,usr_avatar,usr_signature,con_timestamp,con_position
 		FROM '.$GLOBALS['cb_db']->prefix.'users

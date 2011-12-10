@@ -34,7 +34,7 @@ function getSupportedImages () {
 	$ok=array();
 	$gd=gd_info();
 	if ($gd['GIF Read Support'] && $gd['GIF Create Support']) $ok[] = IMAGETYPE_GIF;
-	if ($gd['JPG Support']) $ok[] = IMAGETYPE_JPEG;
+	if ((isset($gd['JPG Support']) && $gd['JPG Support']) || $gd['JPEG Support']) $ok[] = IMAGETYPE_JPEG;
 	if ($gd['PNG Support']) $ok[] = IMAGETYPE_PNG;
 	return $ok;
 }

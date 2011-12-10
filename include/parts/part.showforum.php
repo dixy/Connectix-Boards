@@ -24,7 +24,10 @@ $GLOBALS['cb_tpl']->lang_load('ftg.lang');
 $forumid = null; 
 if (isset($_GET['showforum']) && is_numeric($_GET['showforum'])) {
 	if (isForum((int)$_GET['showforum'])) $forumid = (int)$_GET['showforum'];
-	else trigger_error(lang('error_f_noexist'),E_USER_ERROR);
+	else {
+		header("HTTP/1.0 404 Not Found");
+		trigger_error(lang('error_f_noexist'),E_USER_ERROR);
+	}
 }
 
 /* Markread */

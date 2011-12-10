@@ -35,8 +35,10 @@ $return = $GLOBALS['cb_db']->query('SELECT
 	WHERE topic_id='.(int)$_GET['showtopic']);
 
 /* Erreur, si le sujet n'existe pas */
-if (!$topic = $GLOBALS['cb_db']->fetch_assoc($return))
+if (!$topic = $GLOBALS['cb_db']->fetch_assoc($return)) {
+	header("HTTP/1.0 404 Not Found");
 	trigger_error(lang('error_t_noexist'),E_USER_ERROR);
+}
 
 /* Sujet déplacé, on ne peut théoriquement pas arriver ici, ce n'est qu'une trace. */
 if ($topic['topic_status']==2)

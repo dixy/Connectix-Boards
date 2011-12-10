@@ -64,7 +64,7 @@ function sendMp($from,$to,$subject,$message) {
 			'{--mail_user_name--}'   =>  $dt['usr_name'],
 			'{--mail_forumname--}'   =>  $GLOBALS['cb_cfg']->config['forumname'],
 			'{--mail_forum_owner--}' =>  $GLOBALS['cb_cfg']->config['forumowner'],
-			'{--mail_mp_link--}' 	 =>  'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).'/'.manage_url('index.php?act=mp&sub=1','forum-mp-inbox.html')
+			'{--mail_mp_link--}' 	 =>  'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF']).manage_url('index.php?act=mp&sub=1','forum-mp-inbox.html')
 			);
 		$mailsubj = str_replace('{--mail_forumname--}',$GLOBALS['cb_cfg']->config['forumname'],$GLOBALS['cb_cfg']->config['mailsubject_mp']);
 		$mailmsg = str_replace(array_keys($patterns),$patterns,$GLOBALS['cb_cfg']->config['mail_mp']);
