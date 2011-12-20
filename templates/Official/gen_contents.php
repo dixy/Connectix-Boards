@@ -5,25 +5,6 @@
 <p id="skiplinks"><a href="#contents"><?php echo lang('skiplinks'); ?></a></p>
 
 <div id="menu">
-	<div id="navmenu_cnt" style="display:none;">
-		<a id="navmenu_cmd" onclick="hideAndShow('navmenu');"><?php echo lang('nav_menu'); ?></a>
-		<div id="navmenu" style="display:none;">
-			<ul id="navmenu_items">
-				<li><a id="nav_forward" onclick="navigate('forward');" title="<?php echo lang('nav_item_select'); ?> (f)"><span><?php echo lang('nav_item_select'); ?> (f)</span></a></li>
-				<li><a id="nav_back" onclick="navigate('back');" title="<?php echo lang('nav_page_parent'); ?> (s)"><span><?php echo lang('nav_page_parent'); ?> (s)</span></a></li>
-				<li><a id="nav_top" onclick="navigate('top');" title="<?php echo lang('nav_item_first'); ?> (z)"><span><?php echo lang('nav_item_first'); ?> (z)</span></a></li>
-				<li><a id="nav_up" onclick="navigate('up');" title="<?php echo lang('nav_item_prev'); ?> (e)"><span><?php echo lang('nav_item_prev'); ?> (e)</span></a></li>
-				<li><a id="nav_down" onclick="navigate('down');" title="<?php echo lang('nav_item_next'); ?> (d)"><span><?php echo lang('nav_item_next'); ?> (d)</span></a></li>
-				<li><a id="nav_bottom" onclick="navigate('bottom');" title="<?php echo lang('nav_item_last'); ?> (x)"><span><?php echo lang('nav_item_last'); ?> (x)</span></a></li>
-			</ul>
-			<ul id="navmenu_pages">
-				<li><a id="nav_nextpage" onclick="navigate('nextpage');" title="<?php echo lang('nav_page_next'); ?> (c)"><span><?php echo lang('nav_page_next'); ?> (c)</span></a></li>
-				<li><a id="nav_prevpage" onclick="navigate('prevpage');" title="<?php echo lang('nav_page_prev'); ?> (w)"><span><?php echo lang('nav_page_prev'); ?> (w)</span></a></li>
-			</ul>
-		</div>
-	</div>
-	<script type="text/javascript">hideAndShow('navmenu_cnt');</script>
-
 	<?php if ( !$g_islogged ): ?><form id="fast_connect_form" action="" method="post"><?php endif; ?>
 	<div id="headmenu">
 		<ul>
