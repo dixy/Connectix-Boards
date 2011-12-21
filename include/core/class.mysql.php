@@ -49,15 +49,15 @@ class mysql {
 	
 	/* Effectue une requète. */
 	function query($query,$unbuffered=false) {
-		if (defined('CB_DISPLAY_QUERIES')) $b = microtime_float();
+		if (defined('CB_DISPLAY_QUERIES')) $b = microtime(TRUE);
 
 		if ($unbuffered) $return=mysql_unbuffered_query($query,$this->sqlresource) or $this->_error($query);
 		else $return=mysql_query($query,$this->sqlresource) or $this->_error($query);
 		$this->queriescount++;
 
 		if (defined('CB_DISPLAY_QUERIES')) {
-			$this->queriesdone[] = array('time' => sprintf('%f',microtime_float() - $b),'query' => str_replace(array("\t",','),array('',', '),$query));
-			$this->querytime += (microtime_float() - $b);
+			$this->queriesdone[] = array('time' => sprintf('%f',microtime(TRUE) - $b),'query' => str_replace(array("\t",','),array('',', '),$query));
+			$this->querytime += (microtime(TRUE) - $b);
 		}
 		return $return;
 	}

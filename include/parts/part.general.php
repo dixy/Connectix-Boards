@@ -154,5 +154,6 @@ $GLOBALS['cb_tpl']->assign(array(
 $GLOBALS['cb_tpl']->assign('g_queries',$GLOBALS['cb_db']->gettotalqueries());
 
 /* Fin du timer de script. */
-$GLOBALS['cb_tpl']->assign('g_execution',number_format((microtime_float()-$GLOBALS['micro1']),3));
-?>
+$GLOBALS['cb_tpl']->assign('g_execution',number_format((microtime(TRUE)-$GLOBALS['micro1']),3));
+
+/* End of file part.general.php */

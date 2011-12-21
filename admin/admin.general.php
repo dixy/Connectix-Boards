@@ -138,5 +138,6 @@ if ($_SESSION['cb_user']->isAdmin()) {
 $GLOBALS['cb_tpl']->assign('g_links',$links);
 
 /* Fin du timer de script. */
-$GLOBALS['cb_tpl']->assign('g_execution',number_format((microtime_float()-$GLOBALS['micro1']),3));
-?>
+$GLOBALS['cb_tpl']->assign('g_execution',number_format((microtime(TRUE) - $GLOBALS['micro1']),3));
+
+/* End of file admin.general.php */

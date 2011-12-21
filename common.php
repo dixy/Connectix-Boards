@@ -40,14 +40,8 @@ define('CB_CACHE_CLASSES',	CB_PATH . 'data/classes.cache.php');	// Fichier de ca
 
 define('CB_CACHE_STATS',	CB_PATH . 'data/stats.cache.php');	// Fichier de cache pour les groupes d'utilisateurs
 
-/* Fonction de retour précis du timestamp. */
-function microtime_float() {
-   list($usec,$sec) = explode(' ',microtime());
-   return ((float)$usec + (float)$sec);
-}
-
 /* Timer du script */
-$GLOBALS['micro1'] = microtime_float();
+$GLOBALS['micro1'] = microtime(TRUE);
 
 /* Pour les & dans les adresses et quelques détails au niveau du html. */
 @ini_set('arg_separator.output','&amp;');
