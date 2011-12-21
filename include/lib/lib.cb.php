@@ -650,30 +650,4 @@ function utf8_js_decode($str) {
 	return (preg_replace('#%u([[:alnum:]]{4})#i', '&#x\\1;', $str));
 }
 
-//// FONCTIONS PARFOIS INEXISTANTES (versions de PHP) ////
-
-/* array_combine */
-if (!function_exists('array_combine')) {
-	function array_combine($keys, $values) {
-		$out = array();
-		foreach($keys as $key) 
-			$out[$key] = array_shift($values);
-		return $out;
-	}
-}
-
-/* file_put_contents */
-if (!function_exists('file_put_contents')) {
-	function file_put_contents ($file,$string) {
-		if ($h=fopen($file,'w')) {
-			if (fwrite($h,$string) !== false) {
-				fclose($h);
-				return true;
-			}
-			fclose($h);
-			trigger_error('Could not write data in '.$file.' !',E_USER_WARNING);
-		} else trigger_error('Could not open '.$file.', please check its rights.',E_USER_WARNING);
-		return false;
-	}
-}
-?>
+/* End of file lib.cb.php */
