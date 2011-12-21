@@ -19,7 +19,7 @@
 if (!defined('CB_INC')) exit('Incorrect access attempt !!');
 
 if (!$_SESSION['cb_user']->logged)
-	trigger_error(lang('error_permerror'),E_USER_ERROR);
+	trigger_error(lang('error_permerror'), E_USER_ERROR);
 
 $GLOBALS['cb_tpl']->lang_load('auxi.lang');
 $GLOBALS['cb_addressbar'][] = lang('rep_report');
@@ -29,26 +29,34 @@ require_once(CB_PATH.'include/lib/lib.writing.php');
 
 // Vérification si le message existe
 if (isset($_GET['mess']) && !isMess((int)$_GET['mess']))
-	redirect (manage_url('index.php','forum.html'));
+	redirect(manage_url('index.php', 'forum.html'));
 
 // Gestion de l'envoi du signalement
-if (isset($_POST['report'],$_POST['message'],$_GET['mess'])) {
-	$GLOBALS['cb_db']->query('INSERT INTO '.$GLOBALS['cb_db']->prefix.'reports (rep_desc,rep_msgid,rep_userid,rep_timestamp) VALUES(\''.clean($_POST['message'],STR_MULTILINE).'\','.(int)$_GET['mess'].','.$_SESSION['cb_user']->userid.','.time().')');
-	$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'stats SET st_value=st_value+1 WHERE st_field=\'nb_reports\'');
-	$_SESSION['reported']=true;
-	redirect(manage_url('index.php?act=report','forum-report.html'));
+if (isset($_POST['report'], $_POST['message'], $_GET['mess']))
+{
+	$GLOBALS['cb_db']->query('INSERT INTO '.$GLOBALS['cb_db']->prefix.'reports (rep_desc,rep_msgid,rep_userid,rep_timestamp) '.
+		'VALUES(\''.clean($_POST['message'],STR_MULTILINE).'\','.(int)$_GET['mess'].','.$_SESSION['cb_user']->userid.','.time().')');
+	$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'stats SET st_value = st_value+1 WHERE st_field = \'nb_reports\'');
+	$_SESSION['reported'] = TRUE;
+	redirect(manage_url('index.php?act=report', 'forum-report.html'));
 }
 
 $_SESSION['cb_user']->connected('index_report');
 
-$_SESSION['reported'] = (isset($_SESSION['reported']) && $_SESSION['reported']) ? true : false ;
+$_SESSION['reported'] = (isset($_SESSION['reported']) && $_SESSION['reported']);
 
-if (isset($_GET['mess'])) {
-	$GLOBALS['cb_tpl']->assign('r_needform',true);
-} elseif ($_SESSION['reported']) {
-	trigger_error(lang('rep_success'),E_USER_NOTICE);
-	$GLOBALS['cb_tpl']->assign('r_needform',false);
-} else redirect();
+if (isset($_GET['mess']))
+{
+	$GLOBALS['cb_tpl']->assign('r_needform', TRUE);
+}
+elseif ($_SESSION['reported'])
+{
+	trigger_error(lang('rep_success'), E_USER_NOTICE);
+	$GLOBALS['cb_tpl']->assign('r_needform', FALSE);
+}
+else
+	redirect();
 
-$GLOBALS['cb_tpl']->assign('g_part','part_report.php');
-?>
+$GLOBALS['cb_tpl']->assign('g_part', 'part_report.php');
+
+/* End of file part.report.php */

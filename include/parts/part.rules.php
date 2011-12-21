@@ -23,6 +23,7 @@ $_SESSION['cb_user']->connected('index_rules');
 $GLOBALS['cb_addressbar'][] = lang('rules');
 $GLOBALS['cb_pagename'][] = lang('rules');
 
-$GLOBALS['cb_tpl']->assign('r_contents',$GLOBALS['cb_cfg']->config['forumrules']);
-$GLOBALS['cb_tpl']->assign('g_part','part_rules.php');
-?>
+$GLOBALS['cb_tpl']->assign('r_contents', $GLOBALS['cb_cfg']->config['forumrules']);
+$GLOBALS['cb_tpl']->assign('g_part', 'part_rules.php');
+
+/* End of file part.rules.php */

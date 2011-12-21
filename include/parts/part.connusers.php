@@ -25,27 +25,29 @@ $GLOBALS['cb_pagename'][] = lang('connusers');
 
 require_once(CB_PATH.'include/lib/lib.users.php');
 
-$return = $GLOBALS['cb_db']->query('SELECT con_timestamp,con_position,usr_id,usr_name,gr_name,gr_color
+$return = $GLOBALS['cb_db']->query('SELECT con_timestamp, con_position, usr_id, usr_name, gr_name, gr_color
 	FROM '.$GLOBALS['cb_db']->prefix.'connected c
-	LEFT OUTER JOIN '.$GLOBALS['cb_db']->prefix.'users u ON c.con_id=u.usr_id
-	LEFT OUTER JOIN '.$GLOBALS['cb_db']->prefix.'groups g ON g.gr_id=u.usr_class
-	WHERE con_timestamp>'.(time()-($GLOBALS['cb_cfg']->config['connectedlimit']*60)).'
+	LEFT OUTER JOIN '.$GLOBALS['cb_db']->prefix.'users u ON c.con_id = u.usr_id
+	LEFT OUTER JOIN '.$GLOBALS['cb_db']->prefix.'groups g ON g.gr_id = u.usr_class
+	WHERE con_timestamp > '.(time() - ($GLOBALS['cb_cfg']->config['connectedlimit'] * 60)).'
 	ORDER BY con_timestamp DESC');
 
 /* Affichage des utilisateurs */
 $people = array();
-while ($ppl=$GLOBALS['cb_db']->fetch_assoc($return)) {
-	$pos = getUserLocation ($ppl['con_position']);
+while ($ppl = $GLOBALS['cb_db']->fetch_assoc($return))
+{
+	$pos = getUserLocation($ppl['con_position']);
 
 	$people[] = array(
 		'ppl_location' 	=> 'ttl_'.$pos['position'],
 		'ppl_f' 		=> $pos['f'],
 		'ppl_tg'		=> $pos['tg'],
-		'ppl_link' 		=> ((isset($ppl['usr_id']))?'<a href="'.manage_url('index.php?act=user&amp;showprofile='.$ppl['usr_id'],'forum-m'.$ppl['usr_id'].','.rewrite_words($ppl['usr_name']).'.html').'" title="'.$ppl['gr_name'].'" style="color:'.$ppl['gr_color'].';">'.$ppl['usr_name'].'</a>':''),
+		'ppl_link' 		=> ((isset($ppl['usr_id'])) ? '<a href="'.manage_url('index.php?act=user&amp;showprofile='.$ppl['usr_id'],'forum-m'.$ppl['usr_id'].','.rewrite_words($ppl['usr_name']).'.html').'" title="'.$ppl['gr_name'].'" style="color:'.$ppl['gr_color'].';">'.$ppl['usr_name'].'</a>' : ''),
 		'ppl_lastclick' => dateFormat($ppl['con_timestamp'])
-		);
+	);
 }
-$GLOBALS['cb_tpl']->assign_ref('cu_ppl',$people);
+$GLOBALS['cb_tpl']->assign_ref('cu_ppl', $people);
 
-$GLOBALS['cb_tpl']->assign('g_part','part_connusers.php');
-?>
+$GLOBALS['cb_tpl']->assign('g_part', 'part_connusers.php');
+
+/* End of file part.connusers.php */

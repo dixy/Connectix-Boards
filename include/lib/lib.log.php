@@ -58,27 +58,37 @@ $GLOBALS['cb_log_values'] = array(
 	LOG_EDITPROFILE_SIGNATURE => 'log_editprofile_signature',
 	LOG_ADDNOTE => 'log_addnote',
 	LOG_REPUTATION => 'log_reputation'
-	);
+);
 
 
 /* Fonction qui ajoute un élément de log. */
-function addLog ( $log_type,$log_rep_user,$log_rep_topic,$log_rep_msg,$log_param = 0 ) {
-	$GLOBALS['cb_db']->query('INSERT INTO '.$GLOBALS['cb_db']->prefix.'log (log_type,log_usermake,log_timestamp,log_rep_user,log_rep_topic,log_rep_msg,log_param) VALUES('.$log_type.','.$_SESSION['cb_user']->userid.','.time().','.(int)$log_rep_user.','.(int)$log_rep_topic.','.(int)$log_rep_msg.','.(int)$log_param.')');
+function addLog($log_type, $log_rep_user, $log_rep_topic = 0, $log_rep_msg = 0, $log_param = 0)
+{
+	$GLOBALS['cb_db']->query('INSERT INTO '.$GLOBALS['cb_db']->prefix.'log (log_type,log_usermake,log_timestamp,log_rep_user,log_rep_topic,log_rep_msg,log_param) '.
+		'VALUES('.$log_type.','.$_SESSION['cb_user']->userid.','.time().','.(int)$log_rep_user.','.(int)$log_rep_topic.','.(int)$log_rep_msg.','.(int)$log_param.')');
 }
+
 /* Fonction qui renvoie la description d'un type donné. */
-function getLogDesc ($log_type) {
+function getLogDesc($log_type)
+{
 	$GLOBALS['cb_tpl']->lang_load('log.lang');
 	if (isset($GLOBALS['cb_log_values'][$log_type]))
 		return $GLOBALS['cb_log_values'][$log_type];
-	else return false;
+	else
+		return FALSE;
 }
+
 /* Fonction qui renvoie un menu de choix entre les différents types de report. */
-function chooseMenuLog ($name,$selected,$width=220) {
+function chooseMenuLog($name, $selected, $width = 220)
+{
 	$GLOBALS['cb_tpl']->lang_load('log.lang');
-	$items = array(array('name' => '','selected' => false,'value' => '','lang' => 'log_choosetype'));
+	
+	$items = array(array('name' => '', 'selected' => false, 'value' => '', 'lang' => 'log_choosetype'));
 	foreach ($GLOBALS['cb_log_values'] as $log_id => $log_desc)
 		$items[] = array('name' => $log_id, 'selected' => ($selected == $log_id),'value' => '', 'lang' => $log_desc);
-	$GLOBALS['cb_tpl']->assign('list',array ( 'name' => $name, 'style' => $width, 'items' => $items ));
+	$GLOBALS['cb_tpl']->assign('list', array('name' => $name, 'style' => $width, 'items' => $items));
+	
 	return $GLOBALS['cb_tpl']->fetch('menu_list.php');
 }
-?>
+
+/* End of file lib.log.php */
