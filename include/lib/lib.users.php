@@ -18,7 +18,8 @@
 */
 
 /* Différentes time-zones possibles */
-function getTimeZones() {
+function getTimeZones()
+{
 	return array(
 		'-12'	=> '(GMT - 12:00 h) Enitwetok, Kwajalien',
 		'-11'	=> '(GMT - 11:00 h) Midway Island, Samoa',
@@ -50,54 +51,74 @@ function getTimeZones() {
 		'10'	=> '(GMT + 10:00 h) Melbourne, Papua Nouveaux Guinea, Sydney, Vladivostok',
 		'11'	=> '(GMT + 11:00 h) Magadan, Nouveaux Caledonia, Solomon Islands',
 		'12'	=> '(GMT + 12:00 h) Auckland, Wellington, Fiji, Marshall Island'
-		);
+	);
 }
 
 //// Fonctions de gestion des Groupes ////
 
 /* Fonction qui met un utilisateur à la classe (non-admin) à laquelle il doit appartenir en fonction de ses posts. */
-function setUserPostClass ($user_id,$pass_if_admin = false) {
-	$return=$GLOBALS['cb_db']->query('SELECT usr_nbmess,gr_cond 
+function setUserPostClass($user_id, $pass_if_admin = FALSE)
+{
+	$return = $GLOBALS['cb_db']->query('SELECT usr_nbmess, gr_cond 
 		FROM '.$GLOBALS['cb_db']->prefix.'users 
 			LEFT JOIN '.$GLOBALS['cb_db']->prefix.'groups ON gr_id=usr_class 
 			WHERE usr_id='.$user_id);
-	if ($user_msg=$GLOBALS['cb_db']->fetch_array($return)) {
-		if ($pass_if_admin || !isset($user_msg['gr_cond']) || (isset($user_msg['gr_cond']) && $user_msg['gr_cond']>=0)) {
-			$ng=$GLOBALS['cb_db']->single_result('SELECT gr_id 
+	
+	if ($user_msg = $GLOBALS['cb_db']->fetch_array($return))
+	{
+		if ($pass_if_admin || !isset($user_msg['gr_cond']) || (isset($user_msg['gr_cond']) && $user_msg['gr_cond'] >= 0))
+		{
+			$ng = $GLOBALS['cb_db']->single_result('SELECT gr_id 
 				FROM '.$GLOBALS['cb_db']->prefix.'groups 
 				WHERE gr_cond>=0 AND gr_cond<='.$user_msg['usr_nbmess'].' 
 					AND gr_id!=0 
 				ORDER BY gr_cond DESC LIMIT 1');
-			$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'users SET usr_class='.$ng.' WHERE usr_id='.$user_id);
+			$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'users SET usr_class = '.$ng.' WHERE usr_id='.$user_id);
 			return $ng;
-		} else return false;
-	} else return false;
+		}
+		else
+			return FALSE;
+	}
+	else
+		return FALSE;
 }
 
 //// Fonctions utiles pour la gestion des utilisateurs ////
 
 /* Fonction qui renvoie où se trouve l'utilisateur. */
-function getUserLocation ($location) {
+function getUserLocation($location)
+{
 	$f = 0;		$fname = '';
 	$tg = 0;	$tgname = '';
 
 	$matches = array();
-	if (preg_match('`^index_([0-9]+)$`',$location,$matches)) {
+	if (preg_match('`^index_([0-9]+)$`', $location, $matches))
+	{
 		$position = 'index_f';
 		$f = $matches[1];
-	} elseif (preg_match('`^index(_[0-9]+)+$`',$location,$matches)) {
+	}
+	elseif (preg_match('`^index(_[0-9]+)+$`', $location, $matches))
+	{
 		$position = 'index_tg';
-		$tg = utf8_substr($matches[1],1);
-	} elseif (preg_match('`^index(_[0-9]+)+_t_[0-9]+$`',$location,$matches)) {
+		$tg = utf8_substr($matches[1], 1);
+	}
+	elseif (preg_match('`^index(_[0-9]+)+_t_[0-9]+$`', $location, $matches))
+	{
 		$position = 'index_t';
-		$tg = utf8_substr($matches[1],1);
-	} elseif (preg_match('`^index(_[0-9]+)+_t_[0-9]+_wm$`',$location,$matches)) {
+		$tg = utf8_substr($matches[1], 1);
+	}
+	elseif (preg_match('`^index(_[0-9]+)+_t_[0-9]+_wm$`', $location, $matches))
+	{
 		$position = 'index_t_wm';
-		$tg = utf8_substr($matches[1],1);
-	} elseif (preg_match('`^index(_[0-9]+)+_wm$`',$location,$matches)) {
+		$tg = utf8_substr($matches[1], 1);
+	}
+	elseif (preg_match('`^index(_[0-9]+)+_wm$`', $location, $matches))
+	{
 		$position = 'index_tg_wm';
-		$tg = utf8_substr($matches[1],1);
-	} else $position = $location;
+		$tg = utf8_substr($matches[1], 1);
+	}
+	else
+		$position = $location;
 
 	if ($f != 0)
 		$fname = $GLOBALS['cb_str_fnames'][$f];
@@ -108,11 +129,14 @@ function getUserLocation ($location) {
 }
 
 /* Fonction qui retourne un tableau avec tous les avatars de la galerie. */
-function getGallery () {
-	$avatars=array();
+function getGallery()
+{
+	$avatars = array();
 	$handle = opendir(CB_PATH.'avatars/gallery/');
-	while (false !== ($file = readdir ($handle))) {
-		if ($file != '.' && $file != '..' && $file != 'index.html' && $file != 'index.php') {
+	while (FALSE !== ($file = readdir ($handle)))
+	{
+		if ($file[0] != '.' && $file != 'index.html' && $file != 'index.php')
+		{
 			$avatars[] = $file;
 		}
 	}
@@ -123,27 +147,29 @@ function getGallery () {
 //// Création ou suppression d'un membre ////
 
 /* Enregistrement d'un membre */
-function registerUser($name,$pass,$email,$class=0,$sendmail=true,$notice=true) {
+function registerUser($name, $pass, $email, $class = 0, $sendmail = TRUE, $notice = TRUE)
+{
 	// Vérification du nom de l'utilisateur
 	if (!verifyUserName($name))
-		return false;
+		return FALSE;
 	
 	// Vérification du mot de passe
 	if (!verifyUserPassword($pass))
-		return false;
+		return FALSE;
 	
 	// Vérification de l'adresse mail
 	if (!verifyUserMail($email))
-		return false;
+		return FALSE;
 	
 	// On envoie le mail s'il le faut
 	$registration = 'TRUE';
-	if ($GLOBALS['cb_cfg']->config['enablemail']=='yes' && $sendmail) {
+	if ($GLOBALS['cb_cfg']->config['enablemail'] == 'yes' && $sendmail)
+	{
 		$registration = genValidCode();
 		
-		$patterns=array(
-			'{--mail_user_name--}'	 =>  clean($name,STR_TODISPLAY),
-			'{--mail_user_password--}' =>  clean($pass,STR_TODISPLAY),
+		$patterns = array(
+			'{--mail_user_name--}'	 =>  clean($name, STR_TODISPLAY),
+			'{--mail_user_password--}' =>  clean($pass, STR_TODISPLAY),
 			'{--mail_forumname--}'	 =>  $GLOBALS['cb_cfg']->config['forumname'],
 			'{--mail_confirm_link--}'  =>  'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).((utf8_substr(dirname($_SERVER['PHP_SELF']),-1)!=='/')?'/':'').manage_url('index.php?act=validate&hash='.$registration,'forum-validate.html?hash='.$registration),
 			'{--mail_forum_owner--}'   =>  $GLOBALS['cb_cfg']->config['forumowner']
@@ -156,8 +182,8 @@ function registerUser($name,$pass,$email,$class=0,$sendmail=true,$notice=true) {
 						$GLOBALS['cb_cfg']->config['forumname'],
 						$GLOBALS['cb_cfg']->config['mailsubject_ci']),
 						$mailmsg)) {
-			trigger_error(lang('error_sendmail'),E_USER_WARNING);
-			return false;
+			trigger_error(lang('error_sendmail'), E_USER_WARNING);
+			return FALSE;
 		}
 	}
 	
@@ -167,92 +193,104 @@ function registerUser($name,$pass,$email,$class=0,$sendmail=true,$notice=true) {
 	$id_user = $GLOBALS['cb_db']->insert_id();
 	
 	// Classe de l'utilisateur créé
-	if ($class==0)
+	if ($class == 0)
 		setUserPostClass($id_user);
 	else
-		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'users SET usr_class='.(int)$class.' WHERE usr_id='.$id_user);
+		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'users SET usr_class = '.(int)$class.' WHERE usr_id = '.$id_user);
 	
 	// Finalisation
 	if ($registration == 'TRUE')
 		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'stats SET st_value=st_value+1 WHERE st_field=\'registered_users\'');
 	
 	// Remarque de réussite
-	if ($notice) {
-		if ($GLOBALS['cb_cfg']->config['enablemail']=='yes' && $sendmail)
-			trigger_error(lang('reg_success_mail'),E_USER_NOTICE);
+	if ($notice)
+	{
+		if ($GLOBALS['cb_cfg']->config['enablemail'] == 'yes' && $sendmail)
+			trigger_error(lang('reg_success_mail'), E_USER_NOTICE);
 		else
-			trigger_error(lang('reg_success_nomail'),E_USER_NOTICE);
+			trigger_error(lang('reg_success_nomail'), E_USER_NOTICE);
 	}
 	
-	return true;
+	return TRUE;
 }
 
 /* Vérification du nom d'utilisateur */
-function verifyUserName($username) {
+function verifyUserName($username)
+{
 	// Vérification de la taille du nom
-	if (utf8_strlen(trim($username))<=2 || utf8_strlen(trim($username))>=31) {
-		trigger_error(lang('error_reg_namelength'),E_USER_WARNING);
-		return false;
+	if (utf8_strlen(trim($username)) <= 2 || utf8_strlen(trim($username)) >= 31)
+	{
+		trigger_error(lang('error_reg_namelength'), E_USER_WARNING);
+		return FALSE;
 	}
 	
 	// Vérification des caractères utilisés dans le nom
-	if (preg_match('#[^\w ]+#i',trim($username))) {
-		trigger_error(lang('error_reg_badchars'),E_USER_WARNING);
-		return false;
+	if (preg_match('#[^\w ]+#i', trim($username)))
+	{
+		trigger_error(lang('error_reg_badchars'), E_USER_WARNING);
+		return FALSE;
 	}
 	
 	// Si ce nom existe déjà
-	if ((bool)getUserId($username)) {
-		trigger_error(lang('error_reg_alreadytakenname'),E_USER_WARNING);
-		return false;
+	if ((bool)getUserId($username))
+	{
+		trigger_error(lang('error_reg_alreadytakenname'), E_USER_WARNING);
+		return FALSE;
 	}
 	
 	// Toutes les vérifications sont passées, c'est donc OK
-	return true;
+	return TRUE;
 }
 
 /* Vérification d'un password valide */
-function verifyUserPassword ($pass) {
+function verifyUserPassword($pass)
+{
 	// Vérification de la longueur du password
-	if (utf8_strlen(trim($pass))<3 || utf8_strlen(trim($pass))>20) {
-		trigger_error(lang('error_reg_passwordlength'),E_USER_WARNING);
-		return false;
+	if (utf8_strlen(trim($pass)) < 3 || utf8_strlen(trim($pass)) > 20)
+	{
+		trigger_error(lang('error_reg_passwordlength'), E_USER_WARNING);
+		return FALSE;
 	}
 	
 	// Toutes les vérifications sont passées, c'est donc OK
-	return true;
+	return TRUE;
 }
 
 /* Vérification de la validité d'une adresse mail */
-function verifyUserMail ($email) {
+function verifyUserMail($email)
+{
 	// Vérification du format de l'adresse mail
-	if (!preg_match('#^[^@]+?@.+?\.[a-z]{2,4}$#i',clean($email))) {
-		trigger_error(lang('error_reg_nomail'),E_USER_WARNING);
-		return false;
+	if (!preg_match('#^[^@]+?@.+?\.[a-z]{2,4}$#i', clean($email)))
+	{
+		trigger_error(lang('error_reg_nomail'), E_USER_WARNING);
+		return FALSE;
 	}
 	
 	// Vérification que l'adresse mail n'est pas utilisée par un autre utilisateur
-	if ($GLOBALS['cb_db']->single_result('SELECT 1 FROM '.$GLOBALS['cb_db']->prefix.'users WHERE usr_email=\''.clean($email).'\'')) {
-		trigger_error(lang('error_reg_mail_already_used'),E_USER_WARNING);
-		return false;
+	if ($GLOBALS['cb_db']->single_result('SELECT 1 FROM '.$GLOBALS['cb_db']->prefix.'users WHERE usr_email = \''.clean($email).'\''))
+	{
+		trigger_error(lang('error_reg_mail_already_used'), E_USER_WARNING);
+		return FALSE;
 	}
 	
 	// Toutes les vérifications sont passées, c'est donc OK
-	return true;
+	return TRUE;
 }
 
 /* Suppression d'un membre */
-function deleteUser ($uid) {
-	if (isUser($uid)) {
+function deleteUser($uid)
+{
+	if (isUser($uid))
+	{
 		/* On supprime ses mp et on le marque comme invité */
 		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'mp SET mp_to=0,mp_to_del=1 WHERE mp_to='.$uid);
 		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'mp SET mp_from=0,mp_from_del=1 WHERE mp_from='.$uid);
 		$GLOBALS['cb_db']->query('DELETE FROM '.$GLOBALS['cb_db']->prefix.'mp WHERE mp_to_del=1 AND mp_from_del=1');
 
 		/* On marque ses messages comme écrits par un invité du même nom ou anonyme */
-		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'messages SET msg_userid=0'.((isset($_POST['deleteuser_msg']) && $_POST['deleteuser_msg'] == 'guest')?'':',msg_guest=\''.clean($_POST['delete_user']).'\'').' WHERE msg_userid='.$uid);
+		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'messages SET msg_userid=0'.((isset($_POST['deleteuser_msg']) && $_POST['deleteuser_msg'] == 'guest') ? '' : ',msg_guest=\''.clean($_POST['delete_user']).'\'').' WHERE msg_userid='.$uid);
 		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'messages SET msg_modifieduser=0,msg_modified=\'\' WHERE msg_modifieduser='.$uid);
-		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'topics SET topic_starter=0'.((isset($_POST['deleteuser_msg']) && $_POST['deleteuser_msg'] == 'guest')?'':',topic_guest=\''.clean($_POST['delete_user']).'\'').' WHERE topic_starter='.$uid);
+		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'topics SET topic_starter=0'.((isset($_POST['deleteuser_msg']) && $_POST['deleteuser_msg'] == 'guest') ? '' : ',topic_guest=\''.clean($_POST['delete_user']).'\'').' WHERE topic_starter='.$uid);
 
 		/* On supprimes ses entrées relatives dans tous les endroits du forum où il pourrait intervenir */
 		$GLOBALS['cb_db']->query('UPDATE '.$GLOBALS['cb_db']->prefix.'log SET log_rep_user=0 WHERE log_rep_user='.$uid);
@@ -265,10 +303,18 @@ function deleteUser ($uid) {
 		$GLOBALS['cb_db']->query('DELETE FROM '.$GLOBALS['cb_db']->prefix.'usertgs WHERE utg_userid='.$uid);
 		$GLOBALS['cb_db']->query('DELETE FROM '.$GLOBALS['cb_db']->prefix.'users WHERE usr_id='.$uid);
 
-		trigger_error(str_replace('{name}',clean($_POST['delete_user'],STR_TODISPLAY),lang('user_success_deleted')),E_USER_NOTICE);
-		return true;
+		trigger_error(str_replace('{name}', clean($_POST['delete_user'], STR_TODISPLAY), lang('user_success_deleted')), E_USER_NOTICE);
+		return TRUE;
 	}
-	trigger_error(lang('error_user_noexist'),E_USER_WARNING);
-	return false;
+	
+	trigger_error(lang('error_user_noexist'), E_USER_WARNING);
+	return FALSE;
 }
-?>
+
+/* Retourne l'url du profil d'un membre */
+function url_profile($user_id, $user_name)
+{
+	return manage_url('index.php?act=user&amp;showprofile='.$user_id, 'forum-m'.$user_id.','.rewrite_words($user_name).'.html');
+}
+
+/* End of file lib.users.php */
